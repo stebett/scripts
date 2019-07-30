@@ -1,4 +1,4 @@
-#!/usr/bin/fish
+#!/bin/bash
 
 ### --------------- MAIN PACKAGES ---------------
 cd $HOME
@@ -8,14 +8,13 @@ rm .pkglist
 
 fish
 
-mkdir Packs && cd Packs
-git clone https://github.com/ginkobab/jupyterlab-vim
+mkdir Documents && cd Documents && git clone https://github.com/ginkobab/scripts
+
+
+
 
 ### --------------- FONT ---------------
-cd /usr/share/fonts
-sudo wget https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/AnonymousPro/complete/Anonymice%20Nerd%20Font%20Complete%20Mono.ttf
-
-fc-cache
+cd /usr/share/fonts && sudo wget https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/AnonymousPro/complete/Anonymice%20Nerd%20Font%20Complete%20Mono.ttf && fc-cache
 
 ### --------------- VIRTUALENV --------------- 
 python3 -m venv ~/.virtualenvs/env
@@ -49,16 +48,10 @@ cd $HOME/Packs
 git clone https://aur.archlinux.org/ranger_devicons.git
 cd ranger_devicons && makepkg -si
     
+### --------------- DAEMONS ---------------
+cd $HOME/Packs && git clone https://aur.archlinux.org/google-chrome.git && makepkg -si
+
 ### --------------- FONT SIZE ---------------
 chmod a+x $HOME/Documents/scripts/fontsize.sh
 source $HOME/Documents/scripts/fontsize.sh
-
-### --------------- DAEMONS ---------------
-cd $HOME/Packs
-git clone https://aur.archlinux.org/google-chrome.git
-cd google-chrome && makepkg -si
-
-### --------------- DAEMONS ---------------
-sudo ln -s $HOME/.tlpconf /etc/default/tlp
-systemctl enable --now tlp
 

@@ -24,14 +24,15 @@ switch "$names"
     case "*Ginko*"
         set TARGET Phone
     case "*EOLO*"
-        set TARGET eoloeeee
-    case "*FASTWEB-1-0021965C946C*"
-        echo "Fix this muderfuccher"
-        exit
+        set TARGET eolo
+    case "*WOW FI - FASTWEB"
+        set TARGET wowfi
     case "*Klodi*"
         set TARGET klodi
     case "*Mary*"
         set TARGET mary
+    case "*eduroam*"
+        set TARGET eduroam
     case "*"
         set TARGET 0
 end
