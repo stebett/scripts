@@ -1,39 +1,52 @@
-#!/bin/bash
+#!/usr/bin/fish
+
+### You will need to have fish installed BEFORE executing this script
+
+
 
 ### --------------- MAIN PACKAGES ---------------
-cd $HOME
-wget https://raw.githubusercontent.com/ginkobab/dots/master/.pkglist
+read -P "Do you want to download the folder scripts? y/n   " SCRI
+if [ $SCRI = 'y' ]
+    mkdir $HOME/Documents && cd Documents && git clone https://github.com/ginkobab/scripts
+end
+
+read -P "Do you want to download the folder Projects? y/n   " PROJ
+if [ $PROJ = 'y' ]
+    mkdir $HOME/Documents && cd Documents && git clone https://github.com/ginkobab/Projects
+end
+
+echo "Installing main packages...."
+cd $HOME && wget https://raw.githubusercontent.com/ginkobab/dots/master/.pkglist
 sudo pacman -S (cat .pkglist)
-rm .pkglist
-
-fish
-
-mkdir Documents && cd Documents && git clone https://github.com/ginkobab/scripts
-
-
 
 
 ### --------------- FONT ---------------
-cd /usr/share/fonts && sudo wget https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/AnonymousPro/complete/Anonymice%20Nerd%20Font%20Complete%20Mono.ttf && fc-cache
+read -P "Do you want to install the whole package of nerd fonts? (1.8GB) y/n   " NERD
+if [ $NERD = 'y' ]
+    echo "Installing nerd fonts..."
+    mkdir $HOME/Packs && git clone https://aur.archlinux.org/nerd-fonts-complete.git && cd nerd-fonts-complete && makepkg -si
+end
+
 
 ### --------------- VIRTUALENV --------------- 
+echo "Setting up virtualenv..."
 python3 -m venv ~/.virtualenvs/env
 # put requirements here
 
-### --------------- FISH AS DEFAULT SHELL ---------------
-chsh -s /usr/bin/fish
 
 ### --------------- VIM-PLUG ---------------
+echo "Setting up vim-plug..."
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 ### --------------- DOT FILES --------------- 
-cd $HOME
-echo ".dots" >> .gitignore
+echo "Setting up dotfiles..."
+cd $HOME && echo ".dots" >> .gitignore
 
 git clone --bare https://github.com/ginkobab/dots $HOME/.dots
 
 rm $HOME/.config/fish/fish_variables
+git --git-dir=$HOME/.dots --work-tree=$HOME stash
 git --git-dir=$HOME/.dots --work-tree=$HOME checkout
 git --git-dir=$HOME/.dots --work-tree=$HOME config --local status.showUntrackedFiles no
 
@@ -54,4 +67,13 @@ cd $HOME/Packs && git clone https://aur.archlinux.org/google-chrome.git && makep
 ### --------------- FONT SIZE ---------------
 chmod a+x $HOME/Documents/scripts/fontsize.sh
 source $HOME/Documents/scripts/fontsize.sh
+echo Remember to run PlugInstall in Neovim
+
+### --------------- FISH AS DEFAULT SHELL ---------------
+echo "Setting Fish as default shell (needs to reboot)"
+chsh -s /usr/bin/fish
+read -P "Do you want to reboot now? y/n" REB
+if [ $REB = 'y' ] 
+    reboot
+end
 
