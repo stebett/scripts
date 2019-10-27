@@ -1,15 +1,15 @@
 #!/usr/bin/fish
 
 # Turn on wifi
-set WIFION (sudo wifi on)
-switch "$WIFION"
-    case "*on*"
-        echo "[*] Wifi Enabled..."
-    case "*"
-        echo "[!] Wifi is having problems!"
-        echo "$WIFION"
-        exit
-end
+# set WIFION (sudo wifi on)
+# switch "$WIFION"
+#     case "*on*"
+#         echo "[*] Wifi Enabled..."
+#      case "*"
+#          echo "[!] Wifi is having problems!"
+#          echo "$WIFION"
+#          exit
+# end
 
 # Be sure that there is no previous instance of wpa_supplicant
 # And that wifi interface is up and fine
@@ -23,8 +23,12 @@ set names (sudo iw dev wlp1s0 scan | grep SSID)
 switch "$names"
     case "*Ginko*"
         set TARGET Phone
+    case "*EOLO extender*"
+        set TARGET eolo-extender
     case "*EOLO*"
         set TARGET eolo
+    case "*TISCALI_6C96*"
+        set TARGET tuck
     case "*WOW FI - FASTWEB"
         set TARGET wowfi
     case "*Klodi*"
