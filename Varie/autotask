@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cd /home/ginko/Documents/Progetti/AutoTasks && source /home/ginko/.virtualenvs/env/bin/activate && python main.py
