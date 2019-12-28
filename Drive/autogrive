@@ -1,3 +1,0 @@
-#!/bin/bash
-python /home/ginko/Documents/Scripts/Drive/pdf_mover.py
-cd /home/ginko/Documents/Note/Sync && /usr/local/bin/grive -s Appunti

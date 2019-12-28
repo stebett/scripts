@@ -1,4 +1,4 @@
-#!/usr/bin/fish
+#!/usr/bin/env fish
 
 # Turn on wifi
 # set WIFION (sudo wifi on)
@@ -13,6 +13,7 @@
 
 # Be sure that there is no previous instance of wpa_supplicant
 # And that wifi interface is up and fine
+sudo rfkill unblock wifi
 sudo killall -quiet wpa_supplicant
 sudo ip link set wlp1s0 down
 sudo ip link set wlp1s0 up
@@ -23,10 +24,10 @@ set names (sudo iw dev wlp1s0 scan | grep SSID)
 switch "$names"
     case "*Ginko*"
         set TARGET Phone
-    case "*EOLO extender*"
-        set TARGET eolo-extender
     case "*EOLO*"
         set TARGET eolo
+    case "*EOLO extender*"
+        set TARGET eolo-extender
     case "*TISCALI_6C96*"
         set TARGET tuck
     case "*WOW FI - FASTWEB"
