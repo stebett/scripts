@@ -46,8 +46,8 @@ git --git-dir=$HOME/.dots/ --work-tree=$HOME commit -m 'automatic commit'
 # scripts
 
 cd $HOME/Documents/scripts 
-git add -u
-git commmit -m 'automatic commit'
+git add .
+git commit -m 'automatic commit'
 
 
 # projects
