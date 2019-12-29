@@ -52,7 +52,7 @@ git commit -m 'automatic commit'
 
 # projects
 
-cd $HOME/projects
+cd $HOME/Documents/projects
 
 git add .
 git commit -m 'automatic commit'
