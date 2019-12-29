@@ -1,0 +1,10 @@
+#!/usr/bin/sh
+
+rfkill block all 
+killall -quiet pulseaudio
+killall -quiet bluetoothd
+killall -quiet wpa_supplicant 
+killall -quiet dhcpcd 
+ip link set wlp1s0 down
+
+echo "All network is down!"
