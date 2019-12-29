@@ -58,6 +58,6 @@ git add .
 git commit -m 'automatic commit'
 
 
-dunstify -a 'auto-commit' -u low "Every git repo is up to date" -i avatar-default.png
-dunstify -a 'auto-commit' -u crit "You have to push your repos!" -i avatar-default.png
+dunstify -a 'auto-commit' -u low "Every git repo is up to date" -i avatar-default
+dunstify -a 'auto-commit' -u crit "You have to push your repos!" -i avatar-default
 
