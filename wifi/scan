@@ -24,6 +24,8 @@ set names (sudo iw dev wlp1s0 scan | grep SSID)
 switch "$names"
     case "*Ginko*"
         set TARGET Phone
+    case "*TIM*"
+        set TARGET chiara
     case "*EOLO*"
         set TARGET eolo
     case "*EOLO extender*"
