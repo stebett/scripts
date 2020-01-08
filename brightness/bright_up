@@ -1,0 +1,30 @@
+#!/bin/bash
+
+kernel=$(ls /sys/class/backlight)
+
+max=$(cat /sys/class/backlight/$kernel/max_brightness)
+actual=$(cat /sys/class/backlight/$kernel/brightness)
+
+delta="$((max/30))"
+
+reduced_brightness="$(($actual-$delta))"
+if [ $reduced_brightness -lt 1 ]; then
+    reduced_brightness=1
+fi
+
+amplified_brightness="$(($actual+$delta))"
+if [ $amplified_brightness -mt $max ]; then
+    amplified_brightness=$max
+fi
+
+case $1 in
+    up)
+        echo $amplified_brightness > /sys/class/backlight/$kernel/brightness
+        ;;
+    down)
+        echo $reduced_brightness > /sys/class/backlight/$kernel/brightness
+        ;;
+esac
+
+echo $1 $2 $0
+

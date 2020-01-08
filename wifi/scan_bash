@@ -1,0 +1,95 @@
+#!/bin/bash
+
+rfkill unblock wifi
+killall -quiet wpa_supplicant
+ip link set wlp1s0 down
+ip link set wlp1s0 up
+
+names=$(iw dev wlp1s0 scan | grep SSID)
+
+case $names in 
+    *eduroam*)
+        target=eduroam
+        ;;      
+esac
+    
+case "$names" in
+    *Ginko*)
+       target=Phone
+       ;;
+   *TIM*)
+       target=chiara
+       ;;
+   *EOLO*)
+       target=eolo
+       ;;
+   "*EOLO extender*")
+       target=eolo-extender
+       ;;
+   *TISCALI_6C96*)
+       target=tuck
+       ;;
+   "*WOW FI - FASTWEB")
+       target=wowfi
+       ;;
+   *Klodi*)
+       target=klodi
+       ;;
+   *Mary*)
+       target=mary
+       ;;
+   *eduroam*)
+       target=eduroam
+       ;;
+   *)
+       target=0
+        ;;
+esac
+
+case $target in
+    0)
+        echo "[!] No Connection Aviable!"
+        exit 1
+        ;;
+    *)
+        echo "[*] Connetting to $target"
+        ;;
+esac
+
+connectionOutput=$(wpa_supplicant -B -i wlp1s0 -c /etc/wpa_supplicant/$target.conf)
+
+case $connectionOutput in 
+    *p2p)
+        echo "[!] Not connected, kill wpa_supplicant?"
+        exit 1
+        ;;
+    *Successfully*)
+        echo "[*] Connecting..."
+        ;;
+    *)
+        echo "[!] Not connected, turn on Hotspot?"
+        exit 1
+esac
+
+dhcpcd wlp1s0  > /dev/null 2>&1
+pid=$!
+wait $pid
+
+disconnected=1
+
+while [ $disconnected -eq 1 ]
+do
+    sleep 2
+    wget -q --spider google.com
+    connected=$?
+    case $connected in
+        0)
+            echo "[*] Online!"
+            exit 0
+            ;;
+        *)
+            echo "[!] Offline"
+            echo "[!] Trying again..."
+            ;;
+    esac
+done
