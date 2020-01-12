@@ -1,0 +1,18 @@
+#!/bin/bash
+
+sed -i "s/dwm\.base00:\s.*/dwm\.base00: $base00/" /home/ginko/.Xresources
+sed -i "s/dwm\.base01:\s.*/dwm\.base01: $base01/" /home/ginko/.Xresources
+sed -i "s/dwm\.base02:\s.*/dwm\.base02: $base02/" /home/ginko/.Xresources
+sed -i "s/dwm\.base03:\s.*/dwm\.base03: $base03/" /home/ginko/.Xresources
+sed -i "s/dwm\.base04:\s.*/dwm\.base04: $base04/" /home/ginko/.Xresources
+sed -i "s/dwm\.base05:\s.*/dwm\.base05: $base05/" /home/ginko/.Xresources
+sed -i "s/dwm\.base06:\s.*/dwm\.base06: $base06/" /home/ginko/.Xresources
+sed -i "s/dwm\.base07:\s.*/dwm\.base07: $base07/" /home/ginko/.Xresources
+sed -i "s/dwm\.base08:\s.*/dwm\.base08: $base08/" /home/ginko/.Xresources
+sed -i "s/dwm\.base09:\s.*/dwm\.base09: $base09/" /home/ginko/.Xresources
+sed -i "s/dwm\.base0A:\s.*/dwm\.base0A: $base0A/" /home/ginko/.Xresources
+sed -i "s/dwm\.base0B:\s.*/dwm\.base0B: $base0B/" /home/ginko/.Xresources
+sed -i "s/dwm\.base0C:\s.*/dwm\.base0C: $base0C/" /home/ginko/.Xresources
+sed -i "s/dwm\.base0D:\s.*/dwm\.base0D: $base0D/" /home/ginko/.Xresources
+sed -i "s/dwm\.base0E:\s.*/dwm\.base0E: $base0E/" /home/ginko/.Xresources
+sed -i "s/dwm\.base0F:\s.*/dwm\.base0F: $base0F/" /home/ginko/.Xresources
