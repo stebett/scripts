@@ -17,9 +17,6 @@ case "$names" in
     *Ginko*)
        target=Phone
        ;;
-   *TIM*)
-       target=chiara
-       ;;
    *EOLO*)
        target=eolo
        ;;
@@ -37,6 +34,9 @@ case "$names" in
        ;;
    *Mary*)
        target=mary
+       ;;
+   *TIM*)
+       target=chiara
        ;;
    *eduroam*)
        target=eduroam

@@ -1,8 +1,0 @@
-#!/bin/bash
-
-/usr/bin/pacman -Qe > /home/ginko/.backup/packages.txt
-
-source /home/ginko/.virtualenvs/env/bin/activate
-
-/home/ginko/.virtualenvs/env/bin/pip freeze > /home/ginko/.backup/requirements.txt
-deactivate
