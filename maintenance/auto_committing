@@ -1,5 +1,19 @@
 #!/bin/bash
 
+
+### pacman
+
+/usr/bin/pacman -Qe > /home/ginko/.backup/packages.txt
+
+
+### python
+
+source /home/ginko/.virtualenvs/env/bin/activate
+
+/home/ginko/.virtualenvs/env/bin/pip freeze > /home/ginko/.backup/requirements.txt
+deactivate
+
+
 ### suckless
 
 # dwm
@@ -67,6 +81,5 @@ git commit -m 'automatic commit'
 
 
 
-dunstify -a 'auto-commit' -u low "Every git repo is up to date" -i avatar-default
-dunstify -a 'auto-commit' -u crit "You have to push your repos!" -i avatar-default
+dunstify -u low "Every git repo is up to date" 
 
