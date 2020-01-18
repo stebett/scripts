@@ -7,11 +7,6 @@ ip link set wlp1s0 up
 
 names=$(iw dev wlp1s0 scan | grep SSID)
 
-case $names in 
-    *eduroam*)
-        target=eduroam
-        ;;      
-esac
     
 case "$names" in
     *Ginko*)

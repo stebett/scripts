@@ -1,0 +1,9 @@
+#!/bin/bash
+
+options=( "Clean\nVerbose\nExperimental\n")
+
+choice=$(echo -e ${options[*]} | dmenu -i -p Startup)
+
+sudo /home/ginko/Documents/scripts/maintenance/./bootsetter $choice
+
+
