@@ -1,0 +1,4 @@
+#!/bin/bash
+
+n=$(ls ~/Pictures/Screenshots | wc -l)
+scrot -d 1 ~/Pictures/Screenshots/screenshot$n.png

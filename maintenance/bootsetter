@@ -2,10 +2,11 @@
 
 case $1 in
     Clean)
-        efibootmgr --disk /dev/mmcblk1 --part 1 --create --label "Clean boot" --loader /vmlinuz-linux --unicode 'root=PARTUUID=8c7ca56b-08d0-4227-9c31-7cb51f330fcd rw initrd=\initramfs-linux.img quiet loglevel=3 rd.systemd.show_status=auto rd.udev.log_priority=3 vga=current i915.fastboot=1' --verbose
+        efibootmgr --disk /dev/sda --part 1 --create --label "Clean boot" --loader /vmlinuz-linux --unicode 'root=PARTUUID=4171b8d2-6dc8-47ff-bce7-14d79e7a89e5 rw initrd=\initramfs-linux.img quiet loglevel=3 rd.systemd.show_status=auto rd.udev.log_priority=3 vga=current i915.fastboot=1 vt.global_cursor_default=0' --verbose
     ;;
     Verbose)
-        efibootmgr --disk /dev/mmcblk1 --part 1 --create --label "Verbose boot" --loader /vmlinuz-linux --unicode 'root=PARTUUID=8c7ca56b-08d0-4227-9c31-7cb51f330fcd rw initrd=\initramfs-linux.img' --verbose
+        efibootmgr --disk /dev/sda --part 1 --create --label "Verbose boot" --loader /vmlinuz-linux --unicode 'root=PARTUUID=4171b8d2-6dc8-47ff-bce7-14d79e7a89e5
+ rw initrd=\initramfs-linux.img' --verbose
     ;;
     Experimental)
         exit 0

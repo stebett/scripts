@@ -1,0 +1,9 @@
+#!/bin/bash
+
+envs="$(ls ~/.virtualenvs)"
+
+echo "Pick your environment"
+echo "$envs"
+read -p "-> "
+
+source ~/.virtualenvs/$REPLY/bin/activate

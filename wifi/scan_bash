@@ -2,43 +2,43 @@
 
 rfkill unblock wifi
 killall -quiet wpa_supplicant
-ip link set wlp1s0 down
-ip link set wlp1s0 up
+ip link set wlp3s0 down
+ip link set wlp3s0 up
 
-names=$(iw dev wlp1s0 scan | grep SSID)
+names=$(iw dev wlp3s0 scan | grep SSID)
 
     
 case "$names" in
-    *Ginko*)
-       target=Phone
-       ;;
-   *EOLO*)
-       target=eolo
-       ;;
-   "*EOLO extender*")
-       target=eolo-extender
-       ;;
-   *TISCALI_6C96*)
-       target=tuck
-       ;;
-   "*WOW FI - FASTWEB")
-       target=wowfi
-       ;;
-   *Klodi*)
-       target=klodi
-       ;;
-   *Mary*)
-       target=mary
-       ;;
-   *TIM*)
-       target=chiara
-       ;;
-   *eduroam*)
-       target=eduroam
-       ;;
-   *)
-       target=0
-        ;;
+	*Ginko*)
+		target=Phone
+		;;
+	*OnePlus3*)
+		target=erus
+		;;
+	*FASTWEB-1-00219*)
+		target=maddi
+		;;
+	*UpCycle*)
+		target=upcycle
+		;;
+	*EOLO*)
+		target=eolo
+		;;
+	"*EOLO extender*")
+		target=eolo-extender
+		;;
+	*TISCALI_6C96*)
+		target=tuck
+		;;
+	"*WOW FI - FASTWEB")
+		target=wowfi
+		;;
+	*eduroam*)
+		target=eduroam
+		;;
+	*)
+		target=0
+		;;
 esac
 
 case $target in
@@ -51,7 +51,7 @@ case $target in
         ;;
 esac
 
-connectionOutput=$(wpa_supplicant -B -i wlp1s0 -c /etc/wpa_supplicant/$target.conf)
+connectionOutput=$(wpa_supplicant -B -i wlp3s0 -c /etc/wpa_supplicant/$target.conf)
 
 case $connectionOutput in 
     *p2p)
@@ -66,7 +66,7 @@ case $connectionOutput in
         exit 1
 esac
 
-dhcpcd wlp1s0  > /dev/null 2>&1
+dhcpcd wlp3s0  > /dev/null 2>&1
 pid=$!
 wait $pid
 
