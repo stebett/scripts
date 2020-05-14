@@ -2,8 +2,15 @@
 
 envs="$(ls ~/.virtualenvs)"
 
-echo "Pick your environment"
-echo "$envs"
-read -p "-> "
+if [ $# -eq 0 ]
+  then
+	echo "Pick your environment"
+	echo "$envs"
+	read -p "-> "
+	source ~/.virtualenvs/$REPLY/bin/activate
 
-source ~/.virtualenvs/$REPLY/bin/activate
+else
+	source ~/.virtualenvs/$1/bin/activate
+
+fi 
+

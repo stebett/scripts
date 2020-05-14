@@ -8,6 +8,9 @@ case $1 in
         efibootmgr --disk /dev/sda --part 1 --create --label "Verbose boot" --loader /vmlinuz-linux --unicode 'root=PARTUUID=4171b8d2-6dc8-47ff-bce7-14d79e7a89e5
  rw initrd=\initramfs-linux.img' --verbose
     ;;
+    Plymouth)
+        efibootmgr --disk /dev/sda --part 1 --create --label "Plymouth boot" --loader /vmlinuz-linux --unicode 'root=PARTUUID=4171b8d2-6dc8-47ff-bce7-14d79e7a89e5 rw initrd=\initramfs-linux.img quiet splash loglevel=3 rd.systemd.show_status=auto rd.udev.log_priority=3 vga=current i915.fastboot=1 vt.global_cursor_default=0' --verbose
+    ;;
     Experimental)
         exit 0
     ;;
