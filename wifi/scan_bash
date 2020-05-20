@@ -66,7 +66,7 @@ case $connectionOutput in
         exit 1
 esac
 
-dhcpcd wlp3s0  > /dev/null 2>&1
+systemctl start dhcpcd > /dev/null 2>&1
 pid=$!
 wait $pid
 
