@@ -1,0 +1,5 @@
+#!/bin/bash
+
+pandoc /home/ginko/Documents/notes/QuickNote.md -o /home/ginko/Documents/todo.pdf
+zathura --fork /home/ginko/Documents/todo.pdf 
+

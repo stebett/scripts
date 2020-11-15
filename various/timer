@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo "How long? " 
+read l 
+xdotool getactivewindow windowkill
+sleep $l && dunstify "It's been $l!" 

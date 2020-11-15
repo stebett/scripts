@@ -14,9 +14,6 @@ do
 		*Ginko*)
 			target=Phone
 			;;
-		*Fiorenza*)
-			target=Fiorenza
-			;;
 		*Ecla*)
 			target=Ecla
 			;;

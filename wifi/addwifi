@@ -1,0 +1,17 @@
+#!/bin/bash
+iw dev wlp3s0 scan | grep SSID > /tmp/scan
+sed -e 's/\s*SSID:\s//' -i /tmp/scan
+echo "[*] Choose wifi "
+cat -n /tmp/scan
+read ssid_idx
+p=p
+ssid_idx=$ssid_idx$p
+ssid=$(sed -n $ssid_idx /tmp/scan)
+rm /tmp/scan
+echo "[*] Write password "
+read -s pass
+wpa_passphrase $ssid $pass > /etc/wpa_supplicant/$ssid.conf
+
+mv /home/ginko/Documents/scripts/wifi/scan_bash /home/ginko/Documents/scripts/wifi/scan_bash_tmp
+sed "16i\\\t\t$ssid)\n\t\t\ttarget=$ssid.conf\n\t\t\t;;" /home/ginko/Documents/scripts/wifi/scan_bash_tmp > /home/ginko/Documents/scripts/wifi/scan_bash
+chmod a+x /home/ginko/Documents/scripts/wifi/scan_bash

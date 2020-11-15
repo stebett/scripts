@@ -1,10 +1,7 @@
 #!/usr/bin/sh
 
-killall -quiet scan_bash
 iw dev wlp3s0 disconnect
 rfkill block all 
-killall -quiet pulseaudio
-killall -quiet bluetoothd
 killall -quiet wpa_supplicant 
 killall -quiet dhcpcd 
 ip link set wlp3s0 down
