@@ -1,0 +1,9 @@
+if [[ $kb_now == *us* ]]; then
+	kb_now=us
+	kb_new=it
+else
+	kb_now=it
+	kb_new=us
+fi
+
+swaymsg "input type:keyboard xkb_switch_layout <index>

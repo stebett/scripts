@@ -14,6 +14,12 @@ do
 		*Ginko*)
 			target=Phone
 			;;
+		*BAR_A1*)
+			target=BAR_A1
+			;;
+		"*Fra Vik*")
+			target=fra
+			;;
 		*Fiorenza*)
 			target=Fiorenza
 			;;

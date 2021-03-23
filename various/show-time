@@ -1,0 +1,4 @@
+#!/bin/sh
+
+d=$(date +%T)
+notify-send -c time "$d"
