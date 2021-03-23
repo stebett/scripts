@@ -1,4 +1,6 @@
 #!/bin/sh
+# credit to https://github.com/cyberrumor/SwayEcosystem
+killall show-time
 path=/sys/class/backlight/intel_backlight
 
 max() {
@@ -25,7 +27,7 @@ fi
 
 send_notification() {
 	current=$(brightness)
-	bar=$(seq -s "" $(( (10 * $current) / $top  )) | sed 's/[0-9]//g')
+	bar=$(seq -s "" $(( 1 + (10 * $current) / $top  )) | sed 's/[0-9]//g')
 	barempty=$(seq -s "⭘" $(( ( 11 - ((10 * $current) / $top )) )) | sed 's/[0-9]//g')
 	# makoctl dismiss --all && \
 		notify-send -c brightness -i display-brightness-symbolic.symbolic "$bar$barempty"
@@ -35,7 +37,7 @@ correctly_notify() {
 	current=$(brightness)
 	if [[ $current -le $step ]]; then
 		# makoctl dismiss --all && \
-			notify-send -i display-brightness-symbolic.symbolic ""
+			notify-send -c brightness -i display-brightness-symbolic.symbolic "⭘⭘⭘⭘⭘⭘⭘⭘⭘⭘"
 				else
 					send_notification
 	fi

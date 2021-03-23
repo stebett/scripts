@@ -1,3 +1,4 @@
+killall show-time
 p2=$(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -i "state\|percentage\|time to empty" | grep -oP "(?<=percentage:          ).*")
 p1=$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep -i "state\|percentage\|time to empty" | grep -oP "(?<=percentage:          ).*")
 notify-send -c charge "$p1 $p2"

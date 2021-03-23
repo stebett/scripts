@@ -1,0 +1,37 @@
+#!/bin/bash
+# requires pamixer package to read out volume
+# credit to https://github.com/cyberrumor/SwayEcosystem
+
+currentvolume() {
+	pamixer --get-volume
+}
+
+if [[ $(( $(currentvolume) - 10 )) -le 0 ]]; then
+	pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ 0%
+else
+	pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ -10%
+fi
+
+
+send_notification() {
+	current=$(currentvolume)
+	bar=$(seq -s "" $(( 1 + $current / 10 )) | sed 's/[0-9]//g')
+	barempty=$(seq -s "⭘" $(( ( 110 - $current ) / 10 )) | sed 's/[0-9]//g')
+	# makoctl dismiss --all && \
+	notify-send -c brightness  "$bar$barempty"
+}
+
+correctly_notify() {
+	current=$(currentvolume)
+	if [[ $current -le 0 ]]; then
+		# makoctl dismiss --all && \
+		notify-send -c brightness  "⭘⭘⭘⭘⭘⭘⭘⭘⭘⭘"
+	else
+		send_notification
+	fi
+}
+
+correctly_notify
+
+# uncomment below if you want a bell on volumedown
+# XDG_RUNTIME_DIR=/run/user/1000 paplay /usr/share/sounds/freedesktop/stereo/bell.oga

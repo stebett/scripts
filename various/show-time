@@ -1,4 +1,10 @@
 #!/bin/sh
 
 d=$(date +%T)
-notify-send -c time "$d"
+notify-send -c time "$(date +%T)"
+sleep 1
+notify-send -c time "$(date +%T)"
+sleep 1
+notify-send -c time "$(date +%T)"
+sleep 1
+notify-send -c timelast "$(date +%T)"

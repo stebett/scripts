@@ -1,0 +1,73 @@
+#!/bin/bash
+# requires pamixer to test whether audio is muted
+
+pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+currentvolume() {
+	pamixer --get-volume
+}
+
+volume=$(currentvolume)
+
+
+intensity() {
+	if [[ $volume -ge 70 ]]; then
+		echo high
+	else
+		if [[ $volume -le 30 ]]; then
+			echo low
+		else
+		echo medium
+		fi
+	fi
+}
+
+result=$(intensity)
+
+barfull() {
+	seq -s "" $(( 1 + $volume / 10 )) | sed 's/[0-9]//g'
+}
+
+barfullmute() {
+	seq -s "" $(( 1 + $volume / 10 )) | sed 's/[0-9]//g'
+}
+
+barempty() {
+	seq -s "⭘" $(( (110 - $volume) / 10)) | sed 's/[0-9]//g'
+}
+
+send_notification_unmuted() {
+	drawbar=$(barfull)$(barempty)
+	notify-send -c brightness "$drawbar"
+}
+
+send_notification_muted() {
+	drawbar=$(barfullmute)$(barempty)
+	notify-send -c brightness "$drawbar"
+}
+
+correctly_notify_muted() {
+	if [[ $volume -lt 10 ]]; then
+		notify-send -i audio-volume-muted-symbolic.symbolic "󰽤󰽤󰽤󰽤󰽤󰽤󰽤󰽤󰽤"
+	else
+		send_notification_muted
+	fi
+}
+
+correctly_notify_unmuted() {
+	if [[ $volume -lt 10 ]]; then
+		notify-send -i audio-volume-$result-symbolic.symbolic ""
+	else
+		send_notification_unmuted
+	fi
+}
+
+# if [[ $(pamixer --get-mute) == true ]]; then
+# 	correctly_notify_muted ; else
+# 	correctly_notify_unmuted
+# fi
+if [[ $(pamixer --get-mute) == true ]]; then
+	send_notification_muted ; else
+	send_notification_unmuted
+fi
+

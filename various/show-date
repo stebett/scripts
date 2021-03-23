@@ -1,4 +1,5 @@
 #!/bin/sh
 
-d=$(date +%d/%m/%Y%t)
-notify-send -c time "$d"
+d=$(date +%d/%m/%y)
+killall show-time
+notify-send -c date "$d"
